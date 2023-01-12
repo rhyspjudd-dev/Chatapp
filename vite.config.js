@@ -2,10 +2,13 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
+const path = require('path')
+// const { defineConfig } = require('vite')
+
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.js',
+            input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
         vue({
@@ -17,14 +20,9 @@ export default defineConfig({
             },
         }),
     ],
+    resolve: {
+        alias: {
+            src: '/src',
+          },
+      },
 });
-
-// mix.override(config => {
-//     // Apply a workaround caused by Laravel Mix using the `webpack-dev-server@v4.0.0-beta`:
-//     // https://github.com/webpack/webpack-dev-server/releases/tag/v4.0.0-beta.3.
-//     // Basically the `dev` property has been deprecated in favor of `devMiddleware`.
-//     if (config.devServer) {
-//         config.devServer.devMiddleware = config.devServer.dev;
-//         delete config.devServer.dev;
-//     }
-// });
